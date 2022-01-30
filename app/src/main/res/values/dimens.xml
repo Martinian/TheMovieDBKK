@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="text_size_1">25sp</dimen>
+    <dimen name="margin_size_1">5dp</dimen>
+    <dimen name="height_size_1">2dp</dimen>
+</resources>

@@ -51,9 +51,7 @@ public class NetModule {
                                 .header("Content-Type", "application/json")
                                 .build();
 
-                        okhttp3.Response response = chain.proceed(request);
-
-                        return response;
+                        return chain.proceed(request);
                     }
                 })
                 .connectTimeout(application.getResources().getInteger(R.integer.connect_timeout), TimeUnit.SECONDS)

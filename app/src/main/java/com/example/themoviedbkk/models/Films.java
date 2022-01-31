@@ -9,7 +9,7 @@ public class Films {
 
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<Result> results;
 
     public List<Result> getResults() {
         return results;

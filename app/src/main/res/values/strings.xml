@@ -6,4 +6,5 @@
     <string name="page">1</string>
     <string name="films">FILMS</string>
     <string name="details">DETAILS</string>
+    <string name="image">Image</string>
 </resources>

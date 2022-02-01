@@ -6,12 +6,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.themoviedbkk.details.DetailsPresenter;
 import com.example.themoviedbkk.details.DetailsView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.AndroidInjection;
@@ -23,6 +26,20 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+
+    @BindView(R.id.text_film_id)
+    public TextView textFilmId;
+    @BindView(R.id.text_release_date)
+    public TextView textReleaseDate;
+    @BindView(R.id.text_vote_average)
+    public TextView textVoteAverage;
+    @BindView(R.id.text_title)
+    public TextView textTitle;
+    @BindView(R.id.text_overview)
+    public TextView textOverview;
+    @BindView(R.id.image_toolbar_like)
+    public ImageView imageToolbarLike;
+
 
     DetailsPresenter detailsPresenter;
 
@@ -45,8 +62,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         String poster_path = intent.getStringExtra("poster_path");
 
 
-        detailsPresenter = new DetailsPresenter(this,filmId, releaseDate, voteAverageId, title, overview, poster_path);
-
+        detailsPresenter = new DetailsPresenter(this,filmId, releaseDate, voteAverageId, title, overview,
+                                                 poster_path, imageToolbarLike);
+        detailsPresenter.displayAndConnect();
 
     }
 
@@ -69,7 +87,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         this.runOnUiThread(new Runnable() {
             public void run() {
 
-
+                textFilmId.setText(String.valueOf(filmId));
 
             }
         });
@@ -82,7 +100,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         this.runOnUiThread(new Runnable() {
             public void run() {
 
-
+                textReleaseDate.setText(releaseDate);
 
             }
         });
@@ -95,7 +113,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         this.runOnUiThread(new Runnable() {
             public void run() {
 
-
+                textVoteAverage.setText(String.valueOf(voteAverageId));
 
             }
         });
@@ -108,7 +126,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         this.runOnUiThread(new Runnable() {
             public void run() {
 
-
+                textTitle.setText(title);
 
             }
         });
@@ -121,23 +139,11 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         this.runOnUiThread(new Runnable() {
             public void run() {
 
-
-
-            }
-        });
-
-    }
-
-    @Override
-    public void showPosterPath(String posterPath) {
-
-        this.runOnUiThread(new Runnable() {
-            public void run() {
-
-
+                textOverview.setText(overview);
 
             }
         });
 
     }
+
 }

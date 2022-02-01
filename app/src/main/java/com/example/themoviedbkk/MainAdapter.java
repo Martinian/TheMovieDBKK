@@ -49,6 +49,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
     }
 
+    @NonNull
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 

@@ -136,9 +136,9 @@ public class DatabaseFilmsMemory {
 
     }
 
-    public Cursor getFilmIdFilm(Long id) {
+    public Cursor getFilmIdFilm(Long idFilm) {
 
-        String[] whereArgs = new String[]{String.valueOf(id)};
+        String[] whereArgs = new String[]{String.valueOf(idFilm)};
         String selection = KEY_ID_FILM + " = ?";
 
         return mDb.query(TABLE_FILMS, null, selection, whereArgs, null, null, null);

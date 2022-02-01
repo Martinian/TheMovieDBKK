@@ -3,6 +3,7 @@ package com.example.themoviedbkk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,9 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+
+    @Inject
+    Application application;
 
     @BindView(R.id.text_film_id)
     public TextView textFilmId;
@@ -63,7 +67,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
 
 
         detailsPresenter = new DetailsPresenter(this,filmId, releaseDate, voteAverageId, title, overview,
-                                                 poster_path, imageToolbarLike);
+                                                 poster_path, imageToolbarLike, application);
         detailsPresenter.displayAndConnect();
 
     }
@@ -88,7 +92,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
             public void run() {
 
                 textFilmId.setText(String.valueOf(filmId));
-
             }
         });
 
@@ -101,7 +104,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
             public void run() {
 
                 textReleaseDate.setText(releaseDate);
-
             }
         });
 
@@ -114,7 +116,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
             public void run() {
 
                 textVoteAverage.setText(String.valueOf(voteAverageId));
-
             }
         });
 
@@ -127,7 +128,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
             public void run() {
 
                 textTitle.setText(title);
-
             }
         });
 
@@ -140,7 +140,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
             public void run() {
 
                 textOverview.setText(overview);
-
             }
         });
 

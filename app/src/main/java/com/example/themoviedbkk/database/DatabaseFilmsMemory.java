@@ -1,6 +1,8 @@
 package com.example.themoviedbkk.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -86,4 +88,63 @@ public class DatabaseFilmsMemory {
         }
 
     }
+
+    public boolean AddNewIdFilm(int idFilm ,int likeFilm) {
+
+        final int WRITE_ERROR  = -1;
+
+        boolean okTransaction;
+
+        ContentValues devValues = new  ContentValues();
+        devValues.put(KEY_ID_FILM, idFilm);
+        devValues.put(KEY_LIKE, likeFilm);
+
+
+        mDb.beginTransaction();
+
+        long rowIdInsertNotf =  mDb.insert(TABLE_FILMS,null,devValues);
+
+        if (rowIdInsertNotf != WRITE_ERROR)
+            okTransaction = true;
+        else
+            okTransaction = false;
+
+        mDb.setTransactionSuccessful();
+        mDb.endTransaction();
+
+        return okTransaction;
+
+    }
+
+    public boolean UpdateTableLikeFilm(int idFilm ,int likeFilm) {
+
+        final int UPDATE_SCORE  = 0;
+        String whereClause = KEY_ID_FILM  + " = ?";
+        String[] whereArgs = new String[]{ String.valueOf(idFilm)};
+
+        ContentValues deviceValues = new  ContentValues();
+        deviceValues.put(KEY_LIKE, likeFilm);
+
+        mDb.beginTransaction();
+
+        long rowIdProject = mDb.update(TABLE_FILMS, deviceValues, whereClause, whereArgs);
+
+        mDb.setTransactionSuccessful();
+        mDb.endTransaction();
+
+        return rowIdProject != UPDATE_SCORE;
+
+    }
+
+    public Cursor getFilmIdFilm(Long id) {
+
+        String[] whereArgs = new String[]{String.valueOf(id)};
+        String selection = KEY_ID_FILM + " = ?";
+
+        return mDb.query(TABLE_FILMS, null, selection, whereArgs, null, null, null);
+
+
+    }
+
+
 }

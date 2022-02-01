@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.models.Result;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Inject
     Application application;
+    @Inject
+    DatabaseFilmsMemory provideDatabase;
     @Inject
     Retrofit retrofit;
 

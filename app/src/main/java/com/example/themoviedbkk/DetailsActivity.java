@@ -2,6 +2,7 @@ package com.example.themoviedbkk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.details.DetailsPresenter;
 import com.example.themoviedbkk.details.DetailsView;
 
@@ -30,17 +32,25 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
 
     @Inject
     Application application;
+    @Inject
+    DatabaseFilmsMemory provideDatabase;
 
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.text_film_id)
     public TextView textFilmId;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.text_release_date)
     public TextView textReleaseDate;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.text_vote_average)
     public TextView textVoteAverage;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.text_title)
     public TextView textTitle;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.text_overview)
     public TextView textOverview;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.image_toolbar_like)
     public ImageView imageToolbarLike;
 

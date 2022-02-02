@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.models.Result;
@@ -22,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements MainView{
@@ -49,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
-        presenter = new MainPresenter(retrofit,this ,application);
+        Context context = MainActivity.this;
+        presenter = new MainPresenter(retrofit,this ,application,context);
         presenter.startConnect();
     }
 
@@ -59,24 +64,28 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         listFilms.setLayoutManager(mLayoutManager);
-        mainAdapter = new MainAdapter(mResults);
+        mainAdapter = new MainAdapter(mResults,this);
         listFilms.setItemAnimator(new DefaultItemAnimator());
         listFilms.setAdapter(mainAdapter);
-        listFilms.addOnItemTouchListener(new ScanRecyclerTouchListener(getApplicationContext(), listFilms, new ScanRecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
 
-                Log.d("CLIKNAL - Movies", "  kliknął !");
+    }
 
-                presenter.launchDetailsActivity(position, mainAdapter.getResults());
+    @Override
+    public void afterClickOnItemIageView(ImageView imageLike, int position) {
 
-            }
+        presenter.changeStateImageLike(provideDatabase, imageLike);
+    }
 
-            @Override
-            public void onLongClick(View view, int position) {
+    @Override
+    public void setStateImageView(ImageView imageLike) {
 
-            }
-        }));
+        imageLike.setImageResource(R.drawable.ic_launcher_background);
+    }
+
+    @Override
+    public void afterClickOnItem(int position) {
+
+        presenter.launchDetailsActivity(position, mainAdapter.getResults());
 
     }
 
@@ -88,4 +97,6 @@ public class MainActivity extends AppCompatActivity implements MainView{
         System.exit(1);
 
     }
+
+
 }

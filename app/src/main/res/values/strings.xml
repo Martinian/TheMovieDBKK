@@ -7,6 +7,6 @@
     <string name="films">FILMS</string>
     <string name="details">DETAILS</string>
     <string name="image">Image</string>
-    <string name="image_film_url">http://image.tmdb.org/t/p/w200</string>
+    <string name="image_film_url">http://image.tmdb.org/t/p/w500</string>
 
 </resources>

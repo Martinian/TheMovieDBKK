@@ -1,11 +1,14 @@
 package com.example.themoviedbkk;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.details.DetailsActivityLaunch;
 import com.example.themoviedbkk.models.Films;
 import com.example.themoviedbkk.models.Result;
@@ -27,14 +30,16 @@ public class MainPresenter implements DetailsActivityLaunch {
 
     private final Retrofit retrofit;
     private final Application application;
+    private final Context context;
     private MainView view;
 
 
-    public MainPresenter(Retrofit retrofit, MainView view ,Application application){
+    public MainPresenter(Retrofit retrofit, MainView view, Application application, Context context){
 
         this.retrofit = retrofit;
         this.view = view;
         this.application = application;
+        this.context = context;
 
     }
 
@@ -70,6 +75,8 @@ public class MainPresenter implements DetailsActivityLaunch {
 
     }
 
+
+
     @Override
     public void launchDetailsActivity(int position, List<Result> results) {
 
@@ -82,7 +89,13 @@ public class MainPresenter implements DetailsActivityLaunch {
         i_DetailsActivity.putExtra("overview", results.get(position).getOverview());
         i_DetailsActivity.putExtra("poster_path", results.get(position).getPosterPath());
 
-        application.getApplicationContext().startActivity(i_DetailsActivity);
+        context.startActivity(i_DetailsActivity);
+    }
+
+    @Override
+    public void changeStateImageLike(DatabaseFilmsMemory provideDatabase, ImageView imageLike) {
 
     }
+
+
 }

@@ -11,9 +11,11 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.details.DetailsPresenter;
 import com.example.themoviedbkk.details.DetailsView;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -73,13 +75,21 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         double voteAverageId = intent.getDoubleExtra("vote_average_id",0D);
         String title = intent.getStringExtra("title");
         String overview = intent.getStringExtra("overview");
-        String poster_path = intent.getStringExtra("poster_path");
+        String posterPath = intent.getStringExtra("poster_path");
 
 
         detailsPresenter = new DetailsPresenter(this,filmId, releaseDate, voteAverageId, title, overview,
-                                                 poster_path, imageToolbarLike, application);
+                                                 posterPath, imageToolbarLike, application);
         detailsPresenter.displayAndConnect();
 
+        Log.i ("PICC_KK " ,application.getResources().getString(R.string.image_film_url)  + posterPath);
+//        Picasso.get().load( application.getResources().getString(R.string.image_film_url) + posterPath).placeholder(R.drawable.ic_launcher_background).centerCrop().resize(100,100).into(imageToolbarLike);
+
+        Glide.with(this)
+                .load(application.getResources().getString(R.string.image_film_url) + posterPath)
+                .override(100,100)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(imageToolbarLike);
     }
 
     @Override

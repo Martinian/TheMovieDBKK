@@ -43,6 +43,7 @@ public class ScanRecyclerTouchListener implements RecyclerView.OnItemTouchListen
 
     @Override
     public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
     }
 
     @Override

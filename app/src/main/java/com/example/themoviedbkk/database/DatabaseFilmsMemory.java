@@ -29,7 +29,7 @@ public class DatabaseFilmsMemory {
     private final String CREATE_TABLE_FILMS =
             "CREATE TABLE if not exists " + TABLE_FILMS + " (" +
                     KEY_ROWID + " integer PRIMARY KEY autoincrement ," +
-                    KEY_ID_FILM +  " integer default 0," +
+                    KEY_ID_FILM +  " integer default 0 ," +
                     KEY_LIKE  + " integer default 0 " + ");";
 
     private final String CREATE_INDEX_OF_TABLE_FILMS =

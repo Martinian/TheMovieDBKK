@@ -3,6 +3,7 @@ package com.example.themoviedbkk.details;
 import android.app.Application;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.themoviedbkk.DetailsActivity;
 import com.example.themoviedbkk.R;
 import com.squareup.picasso.Picasso;
@@ -43,6 +44,7 @@ public class DetailsPresenter {
         detailsView.showTitle(title);
         detailsView.showOverview(overview);
 
-        Picasso.get().load( application.getResources().getString(R.string.image_film_url) + posterPath).into(imageToolbarLike);
+
+        //Picasso.get().load( application.getResources().getString(R.string.image_film_url) + posterPath).into(imageToolbarLike);
     }
 }

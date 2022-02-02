@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public void setStateImageView(ImageView imageLike) {
 
-        imageLike.setImageResource(R.drawable.ic_launcher_background);
+        presenter.setStateImageViewFromDb(provideDatabase, imageLike);
     }
 
     @Override

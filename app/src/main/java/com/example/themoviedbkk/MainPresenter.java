@@ -97,5 +97,9 @@ public class MainPresenter implements DetailsActivityLaunch {
 
     }
 
+    @Override
+    public void setStateImageViewFromDb(DatabaseFilmsMemory provideDatabase, ImageView imageLike) {
+        imageLike.setImageResource(R.drawable.ic_launcher_background);
+    }
 
 }

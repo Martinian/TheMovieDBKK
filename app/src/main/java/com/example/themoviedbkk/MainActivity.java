@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
     MainPresenter presenter;
     MainAdapter mainAdapter;
 
+    private boolean actionsfirstclick = false;
+    private boolean refresh = false;
     private Unbinder unbinder;
 
     @Override
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Override
     public void afterClickOnItemIageView(ImageView imageLike, int filmId) {
-
+        Log.i("LOGKKchange",String.valueOf(filmId));
         presenter.changeStateImageLike(provideDatabase, imageLike, filmId);
     }
 
@@ -85,17 +87,34 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     public void afterClickOnItem(int position) {
 
-        presenter.launchDetailsActivity(position, mainAdapter.getResults());
+        Log.i("LOGKK","launch activity ");
+
+        if (!(actionsfirstclick)) {
+
+            actionsfirstclick = true;
+            refresh = true;
+            presenter.launchDetailsActivity(position, mainAdapter.getResults());
+        }
     }
 
     @Override
     public void onBackPressed() {
-
+        provideDatabase.close();
         moveTaskToBack(true);
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (refresh) {
+            refresh = false;
+            mainAdapter.refresh();
+        }
+        actionsfirstclick = false;
+    }
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         @BindView(R.id.image_like)
         public ImageView imageLike;
 
+        @SuppressLint("NonConstantResourceId")
+        @BindView(R.id.dummy_image_like)
+        public LinearLayout dummyImageLike;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -73,28 +78,32 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.textFilmId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LOGKK", "1111");
-                mainActivity.afterClickOnItem(position);
 
+                mainActivity.afterClickOnItem(position);
             }
         });
 
         holder.textTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LOGKK", "22222");
+
                 mainActivity.afterClickOnItem(position);
+            }
+        });
+
+        holder.dummyImageLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mainActivity.afterClickOnItemIageView(holder.imageLike,results.get(position).getId());
             }
         });
 
         holder.imageLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LOGKK", "33333");
 
-               // holder.imageLike.setVisibility(View.INVISIBLE);
-
-                mainActivity.afterClickOnItemIageView(holder.imageLike,position);
+               mainActivity.afterClickOnItemIageView(holder.imageLike,results.get(position).getId());
 
             }
         });
@@ -116,6 +125,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void updateAllFilms(List<Result> results) {
 
         this.results =  results;
+        notifyDataSetChanged();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void refresh() {
+
         notifyDataSetChanged();
     }
 

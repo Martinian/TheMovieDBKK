@@ -6,12 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.database.DatabaseParameters;
+import com.example.themoviedbkk.database.GetStateImageViewFroDb;
+import com.example.themoviedbkk.database.UpdateRecordDatabase;
 import com.example.themoviedbkk.details.DetailsActivityLaunch;
 import com.example.themoviedbkk.models.Films;
 import com.example.themoviedbkk.models.Result;
@@ -95,27 +98,17 @@ public class MainPresenter implements DetailsActivityLaunch {
         context.startActivity(i_DetailsActivity);
     }
 
+    @SuppressLint("Range")
     @Override
     public void changeStateImageLike(DatabaseFilmsMemory provideDatabase, ImageView imageLike, int filmId) {
 
-
-
+        new UpdateRecordDatabase(provideDatabase, imageLike, filmId);
     }
 
     @SuppressLint("Range")
     @Override
     public void setStateImageViewFromDb(DatabaseFilmsMemory provideDatabase, ImageView imageLike, int filmId) {
 
-        Cursor cursor = provideDatabase.getOneFilmByIdFilm(filmId);
-        if (cursor!=null && cursor.getCount() > 0) {
-            if (cursor.moveToFirst()) {
-                if(cursor.getInt(cursor.getColumnIndex(DatabaseParameters.LIKE_COLUMN)) == 1);
-                {
-                    imageLike.setImageResource(R.mipmap.plus02);
-                }
-            }
-        }
-
+        new GetStateImageViewFroDb(provideDatabase, imageLike, filmId);
     }
-
 }

@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.themoviedbkk.database.DatabaseFilmsMemory;
 import com.example.themoviedbkk.details.DetailsPresenter;
 import com.example.themoviedbkk.details.DetailsView;
@@ -53,8 +56,14 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
     @BindView(R.id.text_overview)
     public TextView textOverview;
     @SuppressLint("NonConstantResourceId")
-    @BindView(R.id.image_toolbar_like)
-    public ImageView imageToolbarLike;
+    @BindView(R.id.image_film_da)
+    public ImageView imageFilmDa;
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.dummy_image_like_da)
+    public LinearLayout dummyImageLikeDa;
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.image_like_da)
+    public ImageView imageLikeDa;
 
 
     DetailsPresenter detailsPresenter;
@@ -77,19 +86,11 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
         String overview = intent.getStringExtra("overview");
         String posterPath = intent.getStringExtra("poster_path");
 
-
+        Context context = DetailsActivity.this;
         detailsPresenter = new DetailsPresenter(this,filmId, releaseDate, voteAverageId, title, overview,
-                                                 posterPath, imageToolbarLike, application);
+                                                 posterPath, imageFilmDa, application, dummyImageLikeDa, imageLikeDa,provideDatabase);
         detailsPresenter.displayAndConnect();
 
-        Log.i ("PICC_KK " ,application.getResources().getString(R.string.image_film_url)  + posterPath);
-//        Picasso.get().load( application.getResources().getString(R.string.image_film_url) + posterPath).placeholder(R.drawable.ic_launcher_background).centerCrop().resize(100,100).into(imageToolbarLike);
-
-        Glide.with(this)
-                .load(application.getResources().getString(R.string.image_film_url) + posterPath)
-                .override(100,100)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imageToolbarLike);
     }
 
     @Override

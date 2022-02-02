@@ -8,4 +8,5 @@ public interface DetailsView {
     void showTitle(String title);
     void showOverview(String overview);
 
+
 }

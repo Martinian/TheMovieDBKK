@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">TheMovieDBKK</string>
-    <string name="base_url">https://api.themoviedb.org</string>
+    <string name="base_url">http://api.themoviedb.org</string>
     <string name="api_key">a4d4383032385c4478afddd506e32864</string>
     <string name="language">en-US</string>
     <string name="page">1</string>
     <string name="films">FILMS</string>
     <string name="details">DETAILS</string>
     <string name="image">Image</string>
-    <string name="image_film_url">http://image.tmdb.org/t/p/w500</string>
+    <string name="image_film_url">https://image.tmdb.org/t/p/w500</string>
 
 </resources>

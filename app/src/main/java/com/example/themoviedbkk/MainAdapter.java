@@ -68,13 +68,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.textFilmId.setText(String.valueOf(results.get(position).getId()));
         holder.textTitle.setText(results.get(position).getTitle());
         //holder.imageLike.setImageResource(R.mipmap.plus02); // tutaj trzeba wstawić warunek na widoczność i odczyt z bazy danych
-        mainActivity.setStateImageView(holder.imageLike);
+        mainActivity.setStateImageView(holder.imageLike, results.get(position).getId());
 
         holder.textFilmId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("LOGKK", "1111");
-                mainActivity.afterClickOnItemIageView(holder.imageLike,position);
+                mainActivity.afterClickOnItem(position);
+
             }
         });
 
@@ -91,7 +92,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             public void onClick(View v) {
                 Log.i("LOGKK", "33333");
 
-                holder.imageLike.setVisibility(View.INVISIBLE);
+               // holder.imageLike.setVisibility(View.INVISIBLE);
+
+                mainActivity.afterClickOnItemIageView(holder.imageLike,position);
 
             }
         });

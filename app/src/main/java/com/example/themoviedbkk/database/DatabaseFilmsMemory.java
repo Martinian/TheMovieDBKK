@@ -136,7 +136,7 @@ public class DatabaseFilmsMemory {
 
     }
 
-    public Cursor getFilmIdFilm(Long idFilm) {
+    public Cursor getOneFilmByIdFilm(int idFilm) {
 
         String[] whereArgs = new String[]{String.valueOf(idFilm)};
         String selection = KEY_ID_FILM + " = ?";

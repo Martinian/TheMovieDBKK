@@ -11,5 +11,5 @@ public interface MainView {
     void getFilms(List<Result> mResults);
     void afterClickOnItem(int position);
     void afterClickOnItemIageView(ImageView imageLike, int position);
-    void setStateImageView(ImageView imageLike);
+    void setStateImageView(ImageView imageLike, int filmId);
 }

@@ -1,14 +1,17 @@
 package com.example.themoviedbkk;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.example.themoviedbkk.database.DatabaseFilmsMemory;
+import com.example.themoviedbkk.database.DatabaseParameters;
 import com.example.themoviedbkk.details.DetailsActivityLaunch;
 import com.example.themoviedbkk.models.Films;
 import com.example.themoviedbkk.models.Result;
@@ -93,13 +96,26 @@ public class MainPresenter implements DetailsActivityLaunch {
     }
 
     @Override
-    public void changeStateImageLike(DatabaseFilmsMemory provideDatabase, ImageView imageLike) {
+    public void changeStateImageLike(DatabaseFilmsMemory provideDatabase, ImageView imageLike, int filmId) {
+
+
 
     }
 
+    @SuppressLint("Range")
     @Override
-    public void setStateImageViewFromDb(DatabaseFilmsMemory provideDatabase, ImageView imageLike) {
-        imageLike.setImageResource(R.drawable.ic_launcher_background);
+    public void setStateImageViewFromDb(DatabaseFilmsMemory provideDatabase, ImageView imageLike, int filmId) {
+
+        Cursor cursor = provideDatabase.getOneFilmByIdFilm(filmId);
+        if (cursor!=null && cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                if(cursor.getInt(cursor.getColumnIndex(DatabaseParameters.LIKE_COLUMN)) == 1);
+                {
+                    imageLike.setImageResource(R.mipmap.plus02);
+                }
+            }
+        }
+
     }
 
 }

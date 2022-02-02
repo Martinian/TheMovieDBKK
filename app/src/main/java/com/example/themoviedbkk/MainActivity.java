@@ -71,22 +71,21 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     @Override
-    public void afterClickOnItemIageView(ImageView imageLike, int position) {
+    public void afterClickOnItemIageView(ImageView imageLike, int filmId) {
 
-        presenter.changeStateImageLike(provideDatabase, imageLike);
+        presenter.changeStateImageLike(provideDatabase, imageLike, filmId);
     }
 
     @Override
-    public void setStateImageView(ImageView imageLike) {
+    public void setStateImageView(ImageView imageLike, int filmId) {
 
-        presenter.setStateImageViewFromDb(provideDatabase, imageLike);
+        presenter.setStateImageViewFromDb(provideDatabase, imageLike, filmId);
     }
 
     @Override
     public void afterClickOnItem(int position) {
 
         presenter.launchDetailsActivity(position, mainAdapter.getResults());
-
     }
 
     @Override

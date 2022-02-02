@@ -10,6 +10,6 @@ import java.util.List;
 public interface DetailsActivityLaunch {
 
     void launchDetailsActivity(int position, List<Result> results);
-    void changeStateImageLike(DatabaseFilmsMemory provideDatabase, ImageView imageLike);
-    void setStateImageViewFromDb(DatabaseFilmsMemory provideDatabase, ImageView imageLike);
+    void changeStateImageLike(DatabaseFilmsMemory provideDatabase, ImageView imageLike, int filmId);
+    void setStateImageViewFromDb(DatabaseFilmsMemory provideDatabase, ImageView imageLike, int filmId);
 }

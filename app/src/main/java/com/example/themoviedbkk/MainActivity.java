@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Override
     public void afterClickOnItemIageView(ImageView imageLike, int filmId) {
-        Log.i("LOGKKchange",String.valueOf(filmId));
+
         presenter.changeStateImageLike(provideDatabase, imageLike, filmId);
     }
 
@@ -104,8 +104,6 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Override
     public void afterClickOnItem(int position) {
-
-        Log.i("LOGKK","launch activity ");
 
         if (!(actionsfirstclick)) {
 

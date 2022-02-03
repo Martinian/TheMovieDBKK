@@ -72,7 +72,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
         holder.textFilmId.setText(String.valueOf(results.get(position).getId()));
         holder.textTitle.setText(results.get(position).getTitle());
-        //holder.imageLike.setImageResource(R.mipmap.plus02); // tutaj trzeba wstawić warunek na widoczność i odczyt z bazy danych
         mainActivity.setStateImageView(holder.imageLike, results.get(position).getId());
 
         holder.textFilmId.setOnClickListener(new View.OnClickListener() {

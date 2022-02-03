@@ -54,13 +54,10 @@ public class NetModule {
                         return chain.proceed(request);
                     }
                 })
-                //.connectTimeout(application.getApplicationContext().getResources().getInteger(R.integer.connect_timeout), TimeUnit.SECONDS)
-             //   .readTimeout(application.getResources().getInteger(R.integer.read_timeout), TimeUnit.SECONDS)
                 .cache(cache)
                 .build();
 
         return  new Retrofit.Builder()
-              //  .baseUrl(application.getApplicationContext().getResources().getString(R.string.base_url))
                 .baseUrl("https://api.themoviedb.org")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())

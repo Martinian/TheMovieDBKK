@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private boolean actionsfirstclick = false;
     private boolean refresh = false;
 
-    String[] auto = { "Paries,France", "PA,United States","Parana,Brazil",
-            "Padua,Italy", "Pasadena,CA,United States"};
+    String[] auto = { "ab", "ca","ik",
+            "ol", "si"};
 
     private Unbinder unbinder;
 

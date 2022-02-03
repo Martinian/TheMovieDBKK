@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="text_size_1">25sp</dimen>
+    <dimen name="text_size_1">35sp</dimen>
     <dimen name="margin_size_1">5dp</dimen>
     <dimen name="height_size_1">2dp</dimen>
     <dimen name="icon_star_size">80dp</dimen>

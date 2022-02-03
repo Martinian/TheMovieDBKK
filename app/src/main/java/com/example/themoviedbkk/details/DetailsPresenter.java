@@ -79,7 +79,8 @@ public class DetailsPresenter {
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher_round)
                 .error(R.mipmap.plus02);
-        Glide.with((Activity) detailsView).load(application.getResources().getString(R.string.image_film_url) + posterPath).apply(options).into(imageFilmDa);
+        Glide.with((Activity) detailsView).load(application.getResources().getString(R.string.image_film_url) + posterPath).
+                                           override(400,400).apply(options).into(imageFilmDa);
 
     }
 }

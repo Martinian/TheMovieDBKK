@@ -65,7 +65,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsView,Ha
     @BindView(R.id.image_like_da)
     public ImageView imageLikeDa;
 
-
     DetailsPresenter detailsPresenter;
 
     private Unbinder unbinder;

@@ -5,8 +5,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,7 @@ import com.example.themoviedbkk.details.DetailsActivityLaunch;
 import com.example.themoviedbkk.models.Films;
 import com.example.themoviedbkk.models.Result;
 import com.example.themoviedbkk.net.NowPlayingMovieServiceNet;
+import com.example.themoviedbkk.net.SearchMovieServiceNet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,15 +41,31 @@ public class MainPresenter implements DetailsActivityLaunch {
     private final Retrofit retrofit;
     private final Application application;
     private final Context context;
+    private final AutoCompleteTextView autoCompleteText;
     private MainView view;
 
 
-    public MainPresenter(Retrofit retrofit, MainView view, Application application, Context context){
+    public MainPresenter(Retrofit retrofit, MainView view, Application application, Context context, AutoCompleteTextView autoCompleteText){
 
         this.retrofit = retrofit;
         this.view = view;
         this.application = application;
         this.context = context;
+        this.autoCompleteText = autoCompleteText;
+
+        autoCompleteText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    startConnectQuery(s.toString());
+            }
+        });
 
     }
 
@@ -81,7 +101,37 @@ public class MainPresenter implements DetailsActivityLaunch {
 
     }
 
+    private void startConnectQuery(String query) {
 
+        SearchMovieServiceNet service = retrofit.create(SearchMovieServiceNet.class);
+        Call<ResponseBody> result = service.getPlayingMovieDataQuery(application.getResources().getString(R.string.api_key),
+                application.getResources().getString(R.string.language), query,
+                application.getResources().getString(R.string.page));
+
+        result.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+
+                try {
+                    Gson gson = new Gson();
+                    assert response.body() != null;
+                    view.getFilms(gson.fromJson(response.body().string(), Films.class).getResults());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+
+            }
+
+        });
+
+    }
 
     @Override
     public void launchDetailsActivity(int position, List<Result> results) {

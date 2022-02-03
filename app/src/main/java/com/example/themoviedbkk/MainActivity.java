@@ -9,9 +9,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import com.example.themoviedbkk.database.DatabaseFilmsMemory;
@@ -41,11 +44,20 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @BindView(R.id.list_films)
     RecyclerView listFilms;
 
+    @SuppressLint("NonConstantResourceId")
+    @BindView(R.id.autoCompleteText)
+    AutoCompleteTextView autoCompleteText;
+
+
     MainPresenter presenter;
     MainAdapter mainAdapter;
 
     private boolean actionsfirstclick = false;
     private boolean refresh = false;
+
+    String[] auto = { "Paries,France", "PA,United States","Parana,Brazil",
+            "Padua,Italy", "Pasadena,CA,United States"};
+
     private Unbinder unbinder;
 
     @Override
@@ -55,8 +67,14 @@ public class MainActivity extends AppCompatActivity implements MainView{
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, auto);
+
+        autoCompleteText.setAdapter(adapter);
+        autoCompleteText.setTextColor(Color.BLUE);
+
         Context context = MainActivity.this;
-        presenter = new MainPresenter(retrofit,this ,application,context);
+        presenter = new MainPresenter(retrofit,this ,application,context,autoCompleteText);
         presenter.startConnect();
     }
 

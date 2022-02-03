@@ -10,5 +10,6 @@ public interface SearchMovieServiceNet {
 
     @GET("/3/search/movie")
     @Headers("Content-Type: application/json")
-    Call<ResponseBody> getPlayingMovieData(@Query("api_key") String apiKey, @Query("language") String language, @Query("page") String page);
+    Call<ResponseBody> getPlayingMovieDataQuery(@Query("api_key") String apiKey, @Query("language") String language,
+                                           @Query("query") String query, @Query("page") String page);
 }

@@ -30,10 +30,9 @@
 
     <TextView
         android:id="@+id/text_film_id"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="film id item"
         android:clickable="true"
         android:textSize="@dimen/text_size_1"
         android:layout_marginStart="@dimen/margin_size_1"
@@ -41,10 +40,9 @@
 
     <TextView
         android:id="@+id/text_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="title item"
         android:clickable="true"
         android:textSize="@dimen/text_size_1"
         android:layout_marginStart="@dimen/margin_size_1"
